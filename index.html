@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Roasters — กาแฟที่ตามรอยได้ถึงสันเขาที่ปลูก</title>
+
+<!-- Bootstrap 5.3 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#16262A;        /* deep pine-navy — dark sections */
+    --ink-soft:#213A40;
+    --cream:#F2EEE4;      /* light background */
+    --paper:#FBFAF6;
+    --amber:#C98A34;      /* roast gold accent */
+    --clay:#8A4B2C;       /* coffee-brown accent */
+    --moss:#5B6B4F;       /* quiet tertiary */
+    --charcoal:#221A14;   /* body text on light */
+  }
+
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--charcoal);
+    background:var(--paper);
+  }
+  h1,h2,h3,.display-serif{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  .lede{
+    max-width:62ch;
+    line-height:1.7;
+    color:#4A4038;
+  }
+
+  /* ---------- Navbar ---------- */
+  .navbar-meridian{
+    background:var(--ink);
+    padding-top:.9rem;
+    padding-bottom:.9rem;
+  }
+  .navbar-meridian .navbar-brand{
+    font-family:'Fraunces',serif;
+    font-size:1.35rem;
+    color:var(--cream);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+  }
+  .navbar-meridian .navbar-brand .mark{
+    width:26px;height:26px;
+    border-radius:50%;
+    border:2px solid var(--amber);
+    position:relative;
+    flex:none;
+  }
+  .navbar-meridian .navbar-brand .mark::after{
+    content:"";
+    position:absolute;inset:6px;
+    border-radius:50%;
+    background:var(--amber);
+  }
+  .navbar-meridian .nav-link{
+    color:#CFC7B8;
+    font-size:.95rem;
+    margin:0 .4rem;
+  }
+  .navbar-meridian .nav-link:hover,
+  .navbar-meridian .nav-link.active{color:var(--cream);}
+  .btn-amber{
+    background:var(--amber);
+    border:1px solid var(--amber);
+    color:var(--ink);
+    font-weight:600;
+    padding:.55rem 1.3rem;
+    border-radius:2px;
+  }
+  .btn-amber:hover{
+    background:#B87A28;
+    border-color:#B87A28;
+    color:var(--ink);
+  }
+  .btn-outline-cream{
+    border:1px solid rgba(242,238,228,.5);
+    color:var(--cream);
+    padding:.55rem 1.3rem;
+    border-radius:2px;
+  }
+  .btn-outline-cream:hover{
+    background:rgba(242,238,228,.1);
+    color:var(--cream);
+  }
+  .btn-line{
+    border:1px solid var(--charcoal);
+    color:var(--charcoal);
+    padding:.55rem 1.3rem;
+    border-radius:2px;
+    background:transparent;
+  }
+  .btn-line:hover{
+    background:var(--charcoal);
+    color:var(--cream);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--ink);
+    color:var(--cream);
+    padding:6rem 0 5rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;
+    right:-10%;top:-30%;
+    width:620px;height:620px;
+    border-radius:50%;
+    border:1px solid rgba(201,138,52,.25);
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    right:2%;top:8%;
+    width:420px;height:420px;
+    border-radius:50%;
+    border:1px solid rgba(201,138,52,.18);
+  }
+  .hero h1{
+    font-size:clamp(2.3rem, 5vw, 3.6rem);
+    color:var(--cream);
+    max-width:14ch;
+  }
+  .hero .lede{color:#C9C2B2;}
+  .coord{
+    font-family:'Inter',sans-serif;
+    font-size:.8rem;
+    letter-spacing:.04em;
+    color:var(--amber);
+  }
+
+  /* ---------- Origins ---------- */
+  .section-label{
+    font-size:.8rem;
+    color:var(--moss);
+    letter-spacing:.02em;
+  }
+  .origin-card{
+    background:var(--cream);
+    border:1px solid #E4DCC9;
+    border-radius:2px;
+    padding:1.8rem;
+    height:100%;
+  }
+  .origin-card .alt{
+    font-family:'Fraunces',serif;
+    font-size:2rem;
+    color:var(--clay);
+    line-height:1;
+  }
+  .topo{width:100%;height:60px;}
+
+  /* ---------- Process ---------- */
+  .process-row{
+    border-top:1px solid #E4DCC9;
+    padding:1.4rem 0;
+  }
+  .process-row:last-child{border-bottom:1px solid #E4DCC9;}
+  .process-step{
+    font-family:'Fraunces',serif;
+    color:var(--amber);
+    font-size:1.1rem;
+    width:2.4rem;
+  }
+
+  /* ---------- Order section ---------- */
+  .order-panel{
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:2px;
+    padding:2.5rem;
+  }
+  .order-panel label{
+    color:#CFC7B8;
+    font-size:.88rem;
+    margin-bottom:.35rem;
+  }
+  .order-panel .form-control,
+  .order-panel .form-select{
+    background:var(--ink-soft);
+    border:1px solid #3A4D53;
+    color:var(--cream);
+  }
+  .order-panel .form-control:focus,
+  .order-panel .form-select:focus{
+    background:var(--ink-soft);
+    color:var(--cream);
+    border-color:var(--amber);
+    box-shadow:0 0 0 .2rem rgba(201,138,52,.25);
+  }
+  .order-panel .form-control::placeholder{color:#8B978C;}
+  .order-panel .form-check-label{color:#CFC7B8;font-size:.9rem;}
+
+  .roast-dropdown .btn{
+    width:100%;
+    text-align:left;
+    background:var(--ink-soft);
+    border:1px solid #3A4D53;
+    color:var(--cream);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .roast-dropdown .btn:hover,
+  .roast-dropdown .btn:focus{
+    background:var(--ink-soft);
+    color:var(--cream);
+    border-color:var(--amber);
+  }
+  .roast-dropdown .dropdown-menu{
+    background:var(--ink-soft);
+    border:1px solid #3A4D53;
+    width:100%;
+  }
+  .roast-dropdown .dropdown-item{color:#CFC7B8;}
+  .roast-dropdown .dropdown-item:hover,
+  .roast-dropdown .dropdown-item:focus{
+    background:var(--amber);
+    color:var(--ink);
+  }
+
+  .form-range::-webkit-slider-thumb{background:var(--amber);}
+  .form-range::-moz-range-thumb{background:var(--amber);}
+  .form-range::-webkit-slider-runnable-track{background:#3A4D53;}
+  .grind-scale{
+    display:flex;
+    justify-content:space-between;
+    font-size:.75rem;
+    color:#8B978C;
+    margin-top:.25rem;
+  }
+  .info-dot{
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    width:16px;height:16px;
+    border-radius:50%;
+    border:1px solid #8B978C;
+    color:#8B978C;
+    font-size:.65rem;
+    cursor:help;
+  }
+
+  .invalid-feedback{color:#E7A6A6;}
+  .order-panel .form-control.is-invalid,
+  .order-panel .form-select.is-invalid{border-color:#E7A6A6;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--charcoal);
+    color:#B9AF9F;
+    padding:2.5rem 0;
+    font-size:.88rem;
+  }
+  footer a{color:#CFC7B8;text-decoration:none;}
+  footer a:hover{color:var(--amber);}
+</style>
+</head>
+<body>
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar navbar-expand-lg navbar-meridian sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top"><span class="mark"></span>Meridian Roasters</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" style="border-color:#3A4D53;">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item"><a class="nav-link active" href="#origins">แหล่งปลูก</a></li>
+        <li class="nav-item"><a class="nav-link" href="#process">ขั้นตอน</a></li>
+        <li class="nav-item"><a class="nav-link" href="#order">สั่งซื้อ</a></li>
+        <li class="nav-item ms-lg-3"><a class="btn btn-amber btn-sm" href="#order">สั่งกาแฟ 1 ถุง</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<header class="hero" id="top">
+  <div class="container position-relative">
+    <div class="row">
+      <div class="col-lg-8">
+        <p class="coord mb-3">78°14'W · 06°15'N — คิวคั่วประจำสัปดาห์นี้</p>
+        <h1 class="mb-4">กาแฟที่ตามรอยได้ถึงสันเขาที่ปลูก</h1>
+        <p class="lede mb-4">เรารับซื้อผลผลิตล็อตเล็กจากไร่เดี่ยวโดยตรง จากเกษตรกรที่ปลูกบนความสูงกว่า 1,700 เมตร คั่วภายใน 8 วันหลังเมล็ดมาถึง และระบุชื่อไร่ลงบนถุงทุกใบ — ไม่ใช่แค่ชื่อประเทศ</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="#order" class="btn btn-amber">ดูล็อตกาแฟเดือนนี้</a>
+          <a href="#process" class="btn btn-outline-cream">วิธีคั่วของเรา</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ========== ORIGINS ========== -->
+<section class="py-5 py-lg-6" id="origins" style="padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <p class="section-label mb-1">กำลังคั่วอยู่ตอนนี้</p>
+    <h2 class="mb-5">สามล็อต สามสันเขา</h2>
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="origin-card">
+          <svg class="topo" viewBox="0 0 200 60"><polyline points="0,45 20,30 40,38 60,15 80,25 100,10 120,22 140,8 160,20 180,12 200,24" fill="none" stroke="#C98A34" stroke-width="1.5"/></svg>
+          <div class="alt mt-2">1,950 ม.</div>
+          <h3 class="h5 mt-2 mb-1">กูจี, เอธิโอเปีย</h3>
+          <p class="text-muted small mb-0">แปรรูปแบบวอชต์ · กลิ่นมะลิ ผลไม้เนื้อแข็ง ท้ายรสชาเข้ม จากสหกรณ์ Danche</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="origin-card">
+          <svg class="topo" viewBox="0 0 200 60"><polyline points="0,20 20,32 40,18 60,35 80,20 100,40 120,22 140,30 160,14 180,26 200,16" fill="none" stroke="#8A4B2C" stroke-width="1.5"/></svg>
+          <div class="alt mt-2">1,780 ม.</div>
+          <h3 class="h5 mt-2 mb-1">อูอิลา, โคลอมเบีย</h3>
+          <p class="text-muted small mb-0">แปรรูปแบบฮันนี่ · คาราเมล แอปเปิ้ลแดง ซิตรัสอ่อนๆ จากไร่ Finca El Mirador</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="origin-card">
+          <svg class="topo" viewBox="0 0 200 60"><polyline points="0,30 20,15 40,28 60,10 80,22 100,8 120,24 140,12 160,26 180,10 200,20" fill="none" stroke="#5B6B4F" stroke-width="1.5"/></svg>
+          <div class="alt mt-2">1,400 ม.</div>
+          <h3 class="h5 mt-2 mb-1">กาโย, สุมาตรา</h3>
+          <p class="text-muted small mb-0">แปรรูปแบบเปียก (Wet-hulled) · กลิ่นไม้ซีดาร์ ดาร์กช็อกโกแลต กรดต่ำ จากสหกรณ์ Ketiara</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROCESS ========== -->
+<section class="py-5" id="process" style="background:var(--cream);padding-top:5rem;padding-bottom:5rem;">
+  <div class="container">
+    <p class="section-label mb-1">จากสันเขาสู่ถุงกาแฟ</p>
+    <h2 class="mb-4">สี่ขั้นตอน แปดวัน</h2>
+
+    <div class="process-row row align-items-center">
+      <div class="col-1 process-step">01</div>
+      <div class="col-md-3 fw-semibold">เก็บเกี่ยว &amp; ชิม</div>
+      <div class="col-md-8 text-muted small">เก็บเชอร์รี่กาแฟด้วยมือตอนสุกพอดี เราชิม (cupping) ทุกล็อตก่อนรับซื้อ ให้คะแนนกลิ่น ความเปรี้ยว และบอดี้</div>
+    </div>
+    <div class="process-row row align-items-center">
+      <div class="col-1 process-step">02</div>
+      <div class="col-md-3 fw-semibold">ขนส่ง &amp; พัก</div>
+      <div class="col-md-8 text-muted small">เมล็ดกาแฟดิบเดินทางทางเรือในถุง grain-pro แล้วพักไว้ 2 สัปดาห์เพื่อให้ความชื้นคงที่ก่อนคั่ว</div>
+    </div>
+    <div class="process-row row align-items-center">
+      <div class="col-1 process-step">03</div>
+      <div class="col-md-3 fw-semibold">คั่วตามสั่ง</div>
+      <div class="col-md-8 text-muted small">คั่วทีละล็อตเล็กด้วยเครื่องคั่วแบบดรัม ปรับโปรไฟล์เฉพาะของแต่ละล็อต — ไม่ใช้สูตรคั่วเดียวกับทุกแหล่งปลูก</div>
+    </div>
+    <div class="process-row row align-items-center">
+      <div class="col-1 process-step">04</div>
+      <div class="col-md-3 fw-semibold">บรรจุ &amp; จัดส่ง</div>
+      <div class="col-md-8 text-muted small">บรรจุถุงภายใน 48 ชั่วโมงหลังคั่ว พร้อมวาล์วระบายอากาศ และจัดส่งภายใน 8 วันหลังเมล็ดมาถึง</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ORDER ========== -->
+<section class="py-5" id="order" style="padding-top:5.5rem;padding-bottom:5.5rem;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="order-panel">
+          <p class="section-label mb-1" style="color:var(--amber);">สั่งกาแฟ 1 ถุง</p>
+          <h2 class="mb-4" style="color:var(--cream);">บอกเราหน่อยว่าคุณชงยังไง</h2>
+
+          <form class="row g-3 needs-validation" novalidate id="orderForm">
+
+            <div class="col-md-6">
+              <label for="fullName" class="form-label">ชื่อ-นามสกุล</label>
+              <input type="text" class="form-control" id="fullName" required>
+              <div class="invalid-feedback">กรุณากรอกชื่อของคุณ</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label">อีเมล</label>
+              <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+              <div class="invalid-feedback">กรุณากรอกอีเมลให้ถูกต้อง</div>
+            </div>
+
+            <!-- Dropdown component -->
+            <div class="col-md-6 roast-dropdown">
+              <label class="form-label d-block">เลือกล็อตกาแฟ</label>
+              <div class="dropdown">
+                <button class="btn dropdown-toggle" type="button" id="roastDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span id="roastChoiceLabel">เลือกล็อต…</span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="roastDropdownBtn">
+                  <li><a class="dropdown-item" href="#" data-value="กูจี, เอธิโอเปีย">กูจี, เอธิโอเปีย — วอชต์</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="อูอิลา, โคลอมเบีย">อูอิลา, โคลอมเบีย — ฮันนี่</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="กาโย, สุมาตรา">กาโย, สุมาตรา — เวทฮัลล์</a></li>
+                </ul>
+                <input type="hidden" id="roastChoiceValue" required>
+              </div>
+              <div class="invalid-feedback d-block" id="roastFeedback" style="display:none !important;">กรุณาเลือกล็อตกาแฟ 1 ใน 3</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="bagSize" class="form-label">ขนาดถุง</label>
+              <select class="form-select" id="bagSize" required>
+                <option value="" selected disabled>เลือกขนาด…</option>
+                <option>250 กรัม</option>
+                <option>500 กรัม</option>
+                <option>1 กิโลกรัม</option>
+              </select>
+              <div class="invalid-feedback">กรุณาเลือกขนาดถุง</div>
+            </div>
+
+            <!-- Range component -->
+            <div class="col-md-8">
+              <label for="grindRange" class="form-label">
+                ความหยาบของกาแฟบด
+                <span class="info-dot ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="เลือกให้เข้ากับวิธีชง: บดละเอียดสำหรับเอสเพรสโซ บดหยาบสำหรับเฟรนช์เพรส">?</span>
+              </label>
+              <input type="range" class="form-range" min="1" max="5" step="1" value="3" id="grindRange">
+              <div class="grind-scale">
+                <span>ละเอียด (เอสเพรสโซ)</span>
+                <span id="grindReadout">ปานกลาง (ดริป)</span>
+                <span>หยาบ (เฟรนช์เพรส)</span>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="qty" class="form-label">จำนวน</label>
+              <input type="number" class="form-control" id="qty" min="1" max="12" value="1" required>
+              <div class="invalid-feedback">เลือกจำนวนระหว่าง 1-12 ถุง</div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="subscribe">
+                <label class="form-check-label" for="subscribe">
+                  คั่วใหม่และจัดส่งล็อตนี้ทุก 3 สัปดาห์
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12 pt-2">
+              <button class="btn btn-amber" type="submit">ยืนยันคำสั่งซื้อ</button>
+              <span class="ms-3 small" id="orderConfirm" style="color:#9FCB9A;display:none;">ข้อมูลคำสั่งซื้อถูกต้อง — ขอบคุณครับ!</span>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+    <div>
+      <div class="fw-semibold" style="color:var(--cream);">Meridian Roasters</div>
+      <div>คั่วและจัดส่งจากชลบุรี ประเทศไทย</div>
+    </div>
+    <div class="d-flex gap-4">
+      <a href="#origins">แหล่งปลูก</a>
+      <a href="#process">ขั้นตอน</a>
+      <a href="#order">สั่งซื้อ</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS bundle (includes Popper, needed for dropdowns & tooltips) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // ---- Tooltip init ----
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
+
+  // ---- Dropdown -> hidden input, for form participation ----
+  const roastItems = document.querySelectorAll('#roastDropdownBtn + .dropdown-menu .dropdown-item');
+  const roastLabel = document.getElementById('roastChoiceLabel');
+  const roastValue = document.getElementById('roastChoiceValue');
+  const roastFeedback = document.getElementById('roastFeedback');
+
+  roastItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      roastLabel.textContent = item.dataset.value;
+      roastValue.value = item.dataset.value;
+      roastFeedback.style.display = 'none !important';
+      document.getElementById('roastDropdownBtn').classList.remove('is-invalid');
+    });
+  });
+
+  // ---- Range readout ----
+  const grindRange = document.getElementById('grindRange');
+  const grindReadout = document.getElementById('grindReadout');
+  const grindLabels = {1:'ละเอียดมาก (เอสเพรสโซ)',2:'ละเอียด (โมก้าพอต)',3:'ปานกลาง (ดริป)',4:'ปานกลางค่อนหยาบ (พัวร์โอเวอร์)',5:'หยาบ (เฟรนช์เพรส)'};
+  grindRange.addEventListener('input', () => {
+    grindReadout.textContent = grindLabels[grindRange.value];
+  });
+
+  // ---- Bootstrap-style custom form validation ----
+  const form = document.getElementById('orderForm');
+  const confirmMsg = document.getElementById('orderConfirm');
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let roastOk = !!roastValue.value;
+    roastFeedback.style.display = roastOk ? 'none' : 'block';
+
+    if (form.checkValidity() === false || !roastOk) {
+      confirmMsg.style.display = 'none';
+    } else {
+      confirmMsg.style.display = 'inline';
+    }
+    form.classList.add('was-validated');
+  }, false);
+</script>
+
+</body>
+</html>
