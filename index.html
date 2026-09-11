@@ -159,6 +159,58 @@
   }
   .grain{width:100%;height:60px;}
 
+  /* ---------- Instrument hover-peek ---------- */
+  .instrument-peek{
+    position:relative;
+    cursor:help;
+    border-bottom:1px dotted var(--rosewood);
+  }
+  .instrument-peek .peek-pop{
+    position:absolute;
+    left:0;
+    bottom:calc(100% + 10px);
+    width:130px;
+    background:var(--ink);
+    border:1px solid var(--brass);
+    border-radius:4px;
+    padding:.5rem;
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(6px);
+    transition:opacity .15s ease, transform .15s ease;
+    z-index:30;
+    box-shadow:0 10px 24px rgba(0,0,0,.3);
+    pointer-events:none;
+  }
+  .instrument-peek .peek-pop::after{
+    content:"";
+    position:absolute;
+    top:100%;
+    left:24px;
+    border:6px solid transparent;
+    border-top-color:var(--brass);
+  }
+  .instrument-peek .peek-pop img{
+    width:100%;
+    height:110px;
+    object-fit:cover;
+    display:block;
+    border-radius:2px;
+  }
+  .instrument-peek .peek-pop .peek-label{
+    font-family:'Inter',sans-serif;
+    font-size:.7rem;
+    color:var(--cream);
+    text-align:center;
+    margin-top:.4rem;
+  }
+  .instrument-peek:hover .peek-pop,
+  .instrument-peek:focus .peek-pop{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+  }
+
   /* ---------- Process ---------- */
   .process-row{
     border-top:1px solid #E2D6BF;
@@ -311,7 +363,15 @@
       <div class="col-md-4">
         <div class="maker-card">
           <svg class="grain" viewBox="0 0 200 60"><path d="M0,10 C40,20 60,0 100,15 C140,30 160,5 200,18" fill="none" stroke="#C08A34" stroke-width="1.5"/><path d="M0,30 C40,40 60,20 100,35 C140,50 160,25 200,38" fill="none" stroke="#C08A34" stroke-width="1" opacity="0.5"/></svg>
-          <div class="spec mt-2">กีตาร์โปร่ง</div>
+          <div class="spec mt-2">
+            <span class="instrument-peek" tabindex="0">
+              กีตาร์โปร่ง
+              <span class="peek-pop">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Acoustic_guitar.jpg?width=300" alt="กีตาร์โปร่ง" loading="lazy">
+                <div class="peek-label">กีตาร์โปร่ง</div>
+              </span>
+            </span>
+          </div>
           <h3 class="h5 mt-2 mb-1">คำแหง วงศ์เสียงไม้ — เชียงใหม่</h3>
           <p class="text-muted small mb-0">ท็อปไม้สปรูซ ข้างและหลังไม้พะยูง เสียงอุ่นแน่น ใช้เวลาทำ 6 สัปดาห์ต่อตัว</p>
         </div>
@@ -320,7 +380,15 @@
       <div class="col-md-4">
         <div class="maker-card">
           <svg class="grain" viewBox="0 0 200 60"><path d="M0,25 C40,10 60,35 100,20 C140,5 160,30 200,15" fill="none" stroke="#7A3B2E" stroke-width="1.5"/><path d="M0,42 C40,30 60,50 100,38 C140,25 160,45 200,32" fill="none" stroke="#7A3B2E" stroke-width="1" opacity="0.5"/></svg>
-          <div class="spec mt-2">ไวโอลิน</div>
+          <div class="spec mt-2">
+            <span class="instrument-peek" tabindex="0">
+              ไวโอลิน
+              <span class="peek-pop">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/VIOLIN.JPG?width=300" alt="ไวโอลิน" loading="lazy">
+                <div class="peek-label">ไวโอลิน</div>
+              </span>
+            </span>
+          </div>
           <h3 class="h5 mt-2 mb-1">อติกานต์ สายพิณศิลป์ — อยุธยา</h3>
           <p class="text-muted small mb-0">แกะสลักด้วยมือทั้งตัว เคลือบแลกเกอร์สูตรดั้งเดิม เสียงใสกังวาน ใช้เวลาทำ 3 เดือน</p>
         </div>
@@ -329,7 +397,15 @@
       <div class="col-md-4">
         <div class="maker-card">
           <svg class="grain" viewBox="0 0 200 60"><path d="M0,15 C40,30 60,8 100,25 C140,42 160,12 200,28" fill="none" stroke="#5C6B4F" stroke-width="1.5"/><path d="M0,35 C40,48 60,28 100,42 C140,55 160,30 200,45" fill="none" stroke="#5C6B4F" stroke-width="1" opacity="0.5"/></svg>
-          <div class="spec mt-2">แมนโดลิน</div>
+          <div class="spec mt-2">
+            <span class="instrument-peek" tabindex="0">
+              แมนโดลิน
+              <span class="peek-pop">
+                <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mandolin.JPG?width=300" alt="แมนโดลิน" loading="lazy">
+                <div class="peek-label">แมนโดลิน</div>
+              </span>
+            </span>
+          </div>
           <h3 class="h5 mt-2 mb-1">ปวริศ ไพรรัตนา — น่าน</h3>
           <p class="text-muted small mb-0">หลังโค้งแกะจากไม้เมเปิลชิ้นเดียว เสียงสดใส เหมาะกับดนตรีโฟล์ก ใช้เวลาทำ 5 สัปดาห์</p>
         </div>
@@ -399,9 +475,30 @@
                   <span id="instrumentChoiceLabel">เลือกช่าง…</span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="instrumentDropdownBtn">
-                  <li><a class="dropdown-item" href="#" data-value="คำแหง วงศ์เสียงไม้ — กีตาร์โปร่ง">คำแหง วงศ์เสียงไม้ — กีตาร์โปร่ง</a></li>
-                  <li><a class="dropdown-item" href="#" data-value="อติกานต์ สายพิณศิลป์ — ไวโอลิน">อติกานต์ สายพิณศิลป์ — ไวโอลิน</a></li>
-                  <li><a class="dropdown-item" href="#" data-value="ปวริศ ไพรรัตนา — แมนโดลิน">ปวริศ ไพรรัตนา — แมนโดลิน</a></li>
+                  <li><a class="dropdown-item" href="#" data-value="คำแหง วงศ์เสียงไม้ — กีตาร์โปร่ง">คำแหง วงศ์เสียงไม้ —
+                    <span class="instrument-peek" tabindex="-1">กีตาร์โปร่ง
+                      <span class="peek-pop">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Acoustic_guitar.jpg?width=300" alt="กีตาร์โปร่ง" loading="lazy">
+                        <div class="peek-label">กีตาร์โปร่ง</div>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#" data-value="อติกานต์ สายพิณศิลป์ — ไวโอลิน">อติกานต์ สายพิณศิลป์ —
+                    <span class="instrument-peek" tabindex="-1">ไวโอลิน
+                      <span class="peek-pop">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/VIOLIN.JPG?width=300" alt="ไวโอลิน" loading="lazy">
+                        <div class="peek-label">ไวโอลิน</div>
+                      </span>
+                    </span>
+                  </a></li>
+                  <li><a class="dropdown-item" href="#" data-value="ปวริศ ไพรรัตนา — แมนโดลิน">ปวริศ ไพรรัตนา —
+                    <span class="instrument-peek" tabindex="-1">แมนโดลิน
+                      <span class="peek-pop">
+                        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mandolin.JPG?width=300" alt="แมนโดลิน" loading="lazy">
+                        <div class="peek-label">แมนโดลิน</div>
+                      </span>
+                    </span>
+                  </a></li>
                 </ul>
                 <input type="hidden" id="instrumentChoiceValue" required>
               </div>
